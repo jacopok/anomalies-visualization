@@ -62,7 +62,7 @@ y2 = SEMIMAJOR * np.sin(eccentric_anomaly)
 def plot_angles_index(index, frames_folder):
 
     plt.plot(x1, y1, c='black', lw=2)
-    plt.plot(x2, y2, c='black', lw=1)
+    plt.plot(x2, y2, c='black', lw=0.8)
     plt.gca().set_aspect(1)
 
     plt.plot([0, x2[index]], [0, y2[index]], c=EA_COLOR)
@@ -77,6 +77,7 @@ def plot_angles_index(index, frames_folder):
 
     plt.xlim(-1.1*SEMIMAJOR, 1.7*SEMIMAJOR)
     plt.scatter(x1[index], y1[index], s=100, c='black', zorder=3)
+    plt.plot([x1[index], x1[index]], [y1[index], y2[index]], c='black', lw=0.8)
     plt.scatter(focal_distance, 0, s=100, c='black', zorder=3)
 
     handles = []
@@ -125,4 +126,4 @@ if __name__ == '__main__':
     for index in tqdm(range(1000)):
         plot_angles_index(index, frames_folder)
     
-    make_vid(frames_folder, str(this_folder / 'kepler.mp4'), loop_amount=3)
+    make_vid(frames_folder, str(this_folder / 'kepler.mp4'), loop_amount=2)
