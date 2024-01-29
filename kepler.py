@@ -110,7 +110,7 @@ def make_vid(
             pattern_type='glob', 
             framerate=framerate, 
             s='1920x1440',
-            **{'stream_loop': loop_amount})
+            **{'stream_loop': loop_amount-1})
         .output(vid_name)
         .overwrite_output()
         .run()
@@ -129,4 +129,4 @@ if __name__ == '__main__':
     for index in range(1000):
         plot_angles_index(index, frames_folder)
     
-    make_vid(frames_folder, str(this_folder / 'kepler.mp4'), loop_amount=2)
+    make_vid(frames_folder, str(this_folder / 'kepler.mp4'), loop_amount=3)

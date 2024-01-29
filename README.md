@@ -16,7 +16,7 @@ $$\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$$
 The *eccentricity* $e$ is defined by $e^2 = 1- ( b / a)^2$.
 The *focal distance* $c$ is $c = \sqrt{ a^{2} - b^{2} }$.
 
-The *eccentric anomaly* $E$ is the angle from the periastron to the orbiting body, measured using the *center of the ellipse* as the center.
+The *eccentric anomaly* $E$ is the angle from the periastron to the *projection* of the orbiting body onto the smallest circle containing the ellipse, measured using the *center of the ellipse* as the center.
 
 The *true anomaly* $f$ is the angle from the periastron to the orbiting body, measured using the *focus of the ellipse* as the center.
 
