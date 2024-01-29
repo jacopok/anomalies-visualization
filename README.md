@@ -39,6 +39,12 @@ $$M = E - e \sin E$$
 True anomaly and eccentric anomaly are related through the equation:
 $$(1 - e) \tan^2(f/2) = (1+e) \tan^2(E/2)$$
 
-but solving it is numerically unstable, so there is a [better way](https://ui.adsabs.harvard.edu/abs/1973CeMec...7..388B/abstract):
+but solving it is numerically unstable (the tangent diverges), so there is a [better way](https://ui.adsabs.harvard.edu/abs/1973CeMec...7..388B/abstract):
 define $\beta = e / (1 + \sqrt(1-e^2))$, then
 $$f = E + 2 \text{atan2}(\beta \sin E, 1 - \beta \cos E)$$
+
+where $\text{atan2}(y / x) \sim \arctan( y / x)$ is the two-argument tangent function, which is also stable for $x=0$.
+
+Finally, one may close the circle of conversions with the following relation:
+$$M = \text{atan2}(-\sqrt{ 1-e^{2} \sin f }, -e - \cos f) + \pi -e \frac{\sqrt{ 1 - e^{2} } \sin f}{1+e \cos f}$$
+
