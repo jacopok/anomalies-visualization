@@ -1,9 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import fsolve
 import matplotlib.patches as mpatches
 from pathlib import Path
 import ffmpeg
+from tqdm import tqdm
+from conversion_formulas import mean_anomaly_from_true, eccentric_anomaly_from_mean, true_anomaly_from_eccentric
 
 ECCENTRICITY = 0.7
 SEMIMAJOR = 1.
@@ -25,17 +26,11 @@ def color_arc(center, initial_angle, final_angle, color, arc_radius=ARC_RADIUS):
     y = np.append([y0], y0 + arc_radius * np.sin(angle_span))
     plt.fill(x, y, color=color)
 
-def eccentric_anomaly_from_mean(mean_anomaly, eccentricity):
-    func = lambda E : E - eccentricity*np.sin(E) - mean_anomaly
-    return fsolve(func, x0=mean_anomaly)
 
 # ṡolve for eccentric anomaly by using Kepler's Equation
 eccentric_anomaly = eccentric_anomaly_from_mean(mean_anomaly, ECCENTRICITY)
 
-# formula from https://ui.adsabs.harvard.edu/abs/1973CeMec...7..388B/abstract
-# avoids numerical issues
-beta = ECCENTRICITY / (1+np.sqrt(1 - ECCENTRICITY**2))
-true_anomaly = eccentric_anomaly + 2 * np.arctan2(beta * np.sin(eccentric_anomaly), 1 - beta * np.cos(eccentric_anomaly))
+true_anomaly = true_anomaly_from_eccentric(eccentric_anomaly, ECCENTRICITY)
 
 semiminor = SEMIMAJOR * np.sqrt(1 - ECCENTRICITY**2)
 focal_distance = SEMIMAJOR * ECCENTRICITY
@@ -127,7 +122,7 @@ if __name__ == '__main__':
     if not frames_folder.exists():
         frames_folder.mkdir()
     
-    for index in range(1000):
+    for index in tqdm(range(1000)):
         plot_angles_index(index, frames_folder)
     
     make_vid(frames_folder, str(this_folder / 'kepler.mp4'), loop_amount=3)
