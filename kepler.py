@@ -11,6 +11,7 @@ SEMIMAJOR = 1.
 time = np.linspace(0, 1, num=1000)
 mean_anomaly = np.linspace(0, 2*np.pi, num=1000)
 
+# colors picked from https://davidmathlogic.com/colorblind
 MA_COLOR = '#648FFF'
 EA_COLOR = '#DC267F'
 TA_COLOR = '#FFB000'
