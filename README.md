@@ -8,6 +8,15 @@ to other people.
 
 The video can be found [here](https://www.youtube.com/watch?v=OHl-aCvp6jQ).
 
+### Running the code
+
+The video and the picture can be reproduced by running the script `kepler.py`, 
+as `python kepler.py`.
+Before doing so, one may install the necessary dependencies with `pip insall -r requirements.txt`.
+
+The conversion functions are tested in `test_conversion.py`; one may run the 
+tests by running `pytest`.
+
 ### Definitions
 
 A generic eccentric orbit is described by an ellipse, with semimajor axis $a$ and semiminor axis $b$, so its points obey the equation
